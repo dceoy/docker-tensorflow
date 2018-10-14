@@ -1,0 +1,31 @@
+---
+version: '3'
+
+services:
+  tensorflow:
+    container_name: tensorflow
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: dceoy/tensorflow:latest
+    user: ${UID}:${GID}
+    userns_mode: host
+    ports:
+      - 6006:6006
+      - 8888:8888
+    volumes:
+      - ${PWD}:/wd
+      - jupyter-runtime:/.local/share/jupyter/runtime
+    working_dir: /wd
+    entrypoint:
+      - jupyter
+    command:
+      - notebook
+      - --port=8888
+      - --ip=0.0.0.0
+      - --notebook-dir=.
+      - --allow-root
+      - --no-browser
+
+volumes:
+  jupyter-runtime:
