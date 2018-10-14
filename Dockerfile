@@ -20,8 +20,8 @@ RUN set -e \
       && rm -rf /var/lib/apt/lists/*
 
 RUN set -e \
-      && ln -s /usr/bin/python3.6 /usr/bin/python \
-      && ln -s /usr/bin/python3.6 /usr/bin/python3 \
+      && ln -sf /usr/bin/python3.6 /usr/bin/python \
+      && ln -sf /usr/bin/python3.6 /usr/bin/python3 \
       && /usr/bin/python3.6 /tmp/get-pip.py \
       && pip install -U --no-cache-dir \
         flake8 ggplot jupyter jupyter_contrib_nbextensions jupyterthemes \
