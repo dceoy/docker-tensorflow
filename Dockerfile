@@ -8,12 +8,13 @@ RUN set -e \
 RUN set -e \
       && apt-get -y purge python3* \
       && apt-get -y update \
-      && apt-get -y install software-properties-common \
+      && apt-get -y install --no-install-recommends --no-install-suggests \
+        software-properties-common \
       && add-apt-repository -y ppa:jonathonf/python-3.6 \
       && apt-get -y update \
       && apt-get -y dist-upgrade \
       && apt-get -y install --no-install-recommends --no-install-suggests \
-        build-essential curl libfreetype6-dev libhdf5-serial-dev libpng12-dev \
+        build-essential curl libfreetype6-dev libhdf5-dev libpng12-dev \
         libzmq3-dev pkg-config python3.6-dev rsync unzip \
       && apt-get -y autoremove \
       && apt-get clean \
@@ -29,7 +30,7 @@ RUN set -e \
       && rm -f /tmp/get-pip.py
 
 RUN set -e \
-      && jupyter contrib nbextension install --user \
+      && jupyter contrib nbextension install --system \
       && jt --theme oceans16 --toolbar --nbname --vimext
 
 EXPOSE 6006
