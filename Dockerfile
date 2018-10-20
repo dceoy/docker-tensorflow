@@ -29,11 +29,16 @@ RUN set -e \
         keras pandas pip seaborn tensorflow-gpu \
       && rm -f /tmp/get-pip.py
 
+ENV HOME /home/notebook
+
 RUN set -e \
+      && mkdir ${HOME} \
       && jupyter contrib nbextension install --system \
-      && jt --theme oceans16 --toolbar --nbname --vimext
+      && jt --theme oceans16 --toolbar --nbname --vimext \
+      && find ${HOME} -exec chmod 777 {} \;
 
 EXPOSE 6006
 EXPOSE 8888
 
-ENTRYPOINT ["/usr/bin/python"]
+ENTRYPOINT ["jupyter"]
+CMD ["notebook", "--port=8888", "--ip=0.0.0.0", "--allow-root", "--no-browser"]
