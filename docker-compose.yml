@@ -5,7 +5,7 @@ services:
   tensorflow:
     container_name: tensorflow
     build:
-      context: .
+      context: gpu
       dockerfile: Dockerfile
     image: dceoy/tensorflow:latest
   # runtime: nvidia

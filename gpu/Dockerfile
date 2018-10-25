@@ -15,7 +15,8 @@ RUN set -e \
       && apt-get -y dist-upgrade \
       && apt-get -y install --no-install-recommends --no-install-suggests \
         build-essential curl libfreetype6-dev libhdf5-dev libpng12-dev \
-        libzmq3-dev pkg-config python3.6-dev rsync unzip \
+        libzmq3-dev p7zip-full pbzip2 pigz pkg-config python3.6-dev rsync \
+        unzip \
       && apt-get -y autoremove \
       && apt-get clean \
       && rm -rf /var/lib/apt/lists/*
@@ -23,16 +24,18 @@ RUN set -e \
 RUN set -e \
       && ln -sf /usr/bin/python3.6 /usr/bin/python \
       && ln -sf /usr/bin/python3.6 /usr/bin/python3 \
-      && /usr/bin/python3.6 /tmp/get-pip.py \
+      && /usr/bin/python /tmp/get-pip.py \
       && pip install -U --no-cache-dir \
-        flake8 ggplot jupyter jupyter_contrib_nbextensions jupyterthemes \
-        keras pandas pip seaborn tensorflow-gpu \
+        autopep8 bash_kernel cython feather-format flake8 ggplot jupyter \
+        jupyter_contrib_nbextensions jupyterthemes keras matplotlib pandas \
+        pip seaborn tensorflow-gpu tqdm \
       && rm -f /tmp/get-pip.py
 
 ENV HOME /home/notebook
 
 RUN set -e \
       && mkdir ${HOME} \
+      && /usr/bin/python -m bash_kernel.install \
       && jupyter contrib nbextension install --system \
       && jt --theme oceans16 --toolbar --nbname --vimext \
       && find ${HOME} -exec chmod 777 {} \;

@@ -12,6 +12,13 @@ Pull the image from [Docker Hub](https://hub.docker.com/r/dceoy/tensorflow/).
 $ docker pull dceoy/tensorflow
 ```
 
+Image tags:
+
+- `latest`
+  - TensorFlow for GPU
+- `cpu`
+  - TensorFlow for CPU
+
 Usage
 -----
 
