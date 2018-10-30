@@ -14,7 +14,7 @@ RUN set -e \
       && apt-get -y update \
       && apt-get -y dist-upgrade \
       && apt-get -y install --no-install-recommends --no-install-suggests \
-        build-essential curl libfreetype6-dev libhdf5-dev libpng12-dev \
+        curl libfreetype6-dev libhdf5-dev libpng12-dev \
         libzmq3-dev p7zip-full pbzip2 pigz pkg-config python3.6-dev rsync \
         unzip \
       && apt-get -y autoremove \

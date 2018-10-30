@@ -1,4 +1,4 @@
-FROM python:3.6
+FROM python:3.6-slim
 
 RUN set -e \
       && ln -sf /bin/bash /bin/sh
@@ -7,7 +7,7 @@ RUN set -e \
       && apt-get -y update \
       && apt-get -y dist-upgrade \
       && apt-get -y install --no-install-recommends --no-install-suggests \
-        p7zip-full pbzip2 pigz \
+        gcc libc-dev p7zip-full pbzip2 pigz \
       && apt-get -y autoremove \
       && apt-get clean \
       && rm -rf /var/lib/apt/lists/*
