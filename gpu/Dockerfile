@@ -15,8 +15,9 @@ RUN set -e \
       && apt-get -y dist-upgrade \
       && apt-get -y install --no-install-recommends --no-install-suggests \
         curl libfreetype6-dev libhdf5-dev libpng12-dev \
-        libzmq3-dev p7zip-full pbzip2 pigz pkg-config python3.6-dev rsync \
-        unzip \
+        libzmq3-dev p7zip-full pandoc pbzip2 pigz pkg-config python3.6-dev \
+        rsync texlive-fonts-recommended texlive-generic-recommended \
+        texlive-xetex unzip \
       && apt-get -y autoremove \
       && apt-get clean \
       && rm -rf /var/lib/apt/lists/*
