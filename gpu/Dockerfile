@@ -1,4 +1,4 @@
-FROM nvidia/cuda:9.0-cudnn7-runtime
+FROM nvidia/cuda:10.0-cudnn7-runtime
 
 ADD https://bootstrap.pypa.io/get-pip.py /tmp/get-pip.py
 
@@ -8,25 +8,21 @@ RUN set -e \
 RUN set -e \
       && apt-get -y purge python3* \
       && apt-get -y update \
-      && apt-get -y install --no-install-recommends --no-install-suggests \
-        software-properties-common \
-      && add-apt-repository -y ppa:jonathonf/python-3.6 \
-      && apt-get -y update \
       && apt-get -y dist-upgrade \
       && apt-get -y install --no-install-recommends --no-install-suggests \
-        curl libfreetype6-dev libhdf5-dev libpng12-dev \
-        libzmq3-dev p7zip-full pandoc pbzip2 pigz pkg-config python3.6-dev \
-        rsync texlive-fonts-recommended texlive-generic-recommended \
-        texlive-xetex unzip \
+        curl libfreetype6-dev libhdf5-dev libpng-dev libzmq3-dev p7zip-full \
+        pandoc pbzip2 pigz pkg-config python3.7-dev python3.7-distutils rsync \
+        texlive-fonts-recommended texlive-generic-recommended texlive-xetex \
+        unzip \
       && apt-get -y autoremove \
       && apt-get clean \
       && rm -rf /var/lib/apt/lists/*
 
 RUN set -e \
-      && ln -sf /usr/bin/python3.6 /usr/bin/python \
-      && ln -sf /usr/bin/python3.6 /usr/bin/python3 \
+      && ln -sf /usr/bin/python3.7 /usr/bin/python \
+      && ln -sf /usr/bin/python3.7 /usr/bin/python3 \
       && /usr/bin/python /tmp/get-pip.py \
-      && pip install -U --no-cache-dir \
+      && pip install -U \
         autopep8 bash_kernel cython feather-format flake8 ggplot jupyter \
         jupyter_contrib_nbextensions jupyterthemes keras matplotlib pandas \
         pip seaborn tensorflow-gpu tqdm \
