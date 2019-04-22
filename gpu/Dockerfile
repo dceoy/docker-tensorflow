@@ -10,13 +10,17 @@ RUN set -e \
       && apt-get -y update \
       && apt-get -y dist-upgrade \
       && apt-get -y install --no-install-recommends --no-install-suggests \
-        curl libfreetype6-dev libhdf5-dev libpng-dev libzmq3-dev p7zip-full \
-        pandoc pbzip2 pigz pkg-config python3.7-dev python3.7-distutils rsync \
-        texlive-fonts-recommended texlive-generic-recommended texlive-xetex \
-        unzip \
+        curl libfreetype6-dev libhdf5-dev libpng-dev libzmq3-dev locales \
+        p7zip-full pandoc pbzip2 pigz pkg-config python3.7-dev \
+        python3.7-distutils rsync texlive-fonts-recommended \
+        texlive-generic-recommended texlive-xetex unzip \
       && apt-get -y autoremove \
       && apt-get clean \
       && rm -rf /var/lib/apt/lists/*
+
+RUN set -e \
+      && locale-gen en_US.UTF-8 \
+      && update-locale
 
 RUN set -e \
       && ln -sf /usr/bin/python3.7 /usr/bin/python \
