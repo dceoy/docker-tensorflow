@@ -19,9 +19,10 @@ RUN set -e \
 
 RUN set -e \
       && pip install -U --no-cache-dir \
-        autopep8 bash_kernel cython feather-format flake8 ggplot jupyter \
-        jupyter_contrib_nbextensions jupyterthemes keras matplotlib pandas \
-        pip seaborn tensorflow tqdm
+        autopep8 bash_kernel cython feather-format flake8 flake8-bugbear \
+        flake8-isort ggplot jupyter jupyter_contrib_nbextensions \
+        jupyterthemes keras matplotlib pandas pep8-naming pip seaborn \
+        tensorflow tqdm
 
 ENV HOME /home/notebook
 

@@ -27,9 +27,10 @@ RUN set -e \
       && ln -sf /usr/bin/python3.7 /usr/bin/python3 \
       && /usr/bin/python /tmp/get-pip.py \
       && pip install -U \
-        autopep8 bash_kernel cython feather-format flake8 ggplot jupyter \
-        jupyter_contrib_nbextensions jupyterthemes keras matplotlib pandas \
-        pip seaborn tensorflow-gpu tqdm \
+        autopep8 bash_kernel cython feather-format flake8 flake8-bugbear \
+        flake8-isort ggplot jupyter jupyter_contrib_nbextensions \
+        jupyterthemes keras matplotlib pandas pep8-naming pip seaborn \
+        tensorflow-gpu tqdm \
       && rm -f /tmp/get-pip.py
 
 ENV HOME /home/notebook
