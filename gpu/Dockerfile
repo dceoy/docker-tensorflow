@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.0-cudnn7-runtime
+FROM nvidia/cuda:10.2-cudnn7-runtime
 
 ADD https://bootstrap.pypa.io/get-pip.py /tmp/get-pip.py
 

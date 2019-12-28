@@ -1,13 +1,15 @@
-FROM python:3.7-slim
+FROM ubuntu:latest
 
-RUN set -e \
-      && ln -sf /bin/bash /bin/sh
+ENV DEBIAN_FRONTEND noninteractive
+
+ADD https://bootstrap.pypa.io/get-pip.py /tmp/get-pip.py
 
 RUN set -e \
       && apt-get -y update \
       && apt-get -y dist-upgrade \
       && apt-get -y install --no-install-recommends --no-install-suggests \
-        curl gcc libc-dev locales p7zip-full pandoc pbzip2 pigz \
+        apt-transport-https apt-utils ca-certificates curl gcc locales \
+        p7zip-full pandoc pbzip2 pigz python3.7-dev python3.7-distutils \
         texlive-fonts-recommended texlive-generic-recommended texlive-xetex \
       && apt-get -y autoremove \
       && apt-get clean \
@@ -18,6 +20,7 @@ RUN set -e \
       && update-locale
 
 RUN set -e \
+      && python3.7 /tmp/get-pip.py \
       && pip install -U --no-cache-dir \
         autopep8 bash_kernel cython feather-format flake8 flake8-bugbear \
         flake8-isort ggplot jupyter jupyter_contrib_nbextensions \
@@ -28,7 +31,7 @@ ENV HOME /home/notebook
 
 RUN set -e \
       && mkdir ${HOME} \
-      && python -m bash_kernel.install \
+      && python3.7 -m bash_kernel.install \
       && jupyter contrib nbextension install --system \
       && jt --theme oceans16 -f ubuntu --toolbar --nbname --vimext \
       && find ${HOME} -exec chmod 777 {} \;
