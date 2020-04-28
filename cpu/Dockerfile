@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:20.04
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -9,8 +9,8 @@ RUN set -e \
       && apt-get -y dist-upgrade \
       && apt-get -y install --no-install-recommends --no-install-suggests \
         apt-transport-https apt-utils ca-certificates curl gcc locales \
-        p7zip-full pandoc pbzip2 pigz python3.7-dev python3.7-distutils \
-        texlive-fonts-recommended texlive-generic-recommended texlive-xetex \
+        p7zip-full pandoc pbzip2 pigz python3-dev python3-distutils \
+        texlive-fonts-recommended texlive-plain-generic texlive-xetex \
       && apt-get -y autoremove \
       && apt-get clean \
       && rm -rf /var/lib/apt/lists/*
@@ -20,9 +20,8 @@ RUN set -e \
       && update-locale
 
 RUN set -e \
-      && ln -sf /usr/bin/python3.7 /usr/bin/python \
-      && ln -sf /usr/bin/python3.7 /usr/bin/python3 \
-      && /usr/bin/python /tmp/get-pip.py \
+      && ln -s python3 /usr/bin/python \
+      && /usr/bin/python3 /tmp/get-pip.py \
       && pip install -U --no-cache-dir \
         autopep8 bash_kernel cython feather-format flake8 flake8-bugbear \
         flake8-isort ggplot jupyter jupyter_contrib_nbextensions \
@@ -33,7 +32,7 @@ ENV HOME /home/notebook
 
 RUN set -e \
       && mkdir ${HOME} \
-      && /usr/bin/python -m bash_kernel.install \
+      && /usr/bin/python3 -m bash_kernel.install \
       && jupyter contrib nbextension install --system \
       && jt --theme oceans16 -f ubuntu --toolbar --nbname --vimext \
       && find ${HOME} -exec chmod 777 {} \;
