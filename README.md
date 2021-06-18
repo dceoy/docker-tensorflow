@@ -11,7 +11,7 @@ Docker image
 Pull the image from [Docker Hub](https://hub.docker.com/r/dceoy/tensorflow/).
 
 ```sh
-$ docker pull dceoy/tensorflow
+$ docker image pull dceoy/tensorflow
 ```
 
 Image tags:
